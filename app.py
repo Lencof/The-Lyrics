@@ -1,13 +1,13 @@
-import os
+import os # use os
 
 from flask import Flask, render_template, request, redirect, session, flash, json, g, jsonify, Response
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError, InvalidRequestError
 from sqlalchemy.sql.expression import func
 from flask_bcrypt import Bcrypt
-import re
-import random
-import requests
+import re # use re
+import random # use random
+import requests # use requests
 from keys import api_key
 
 from forms import AddUserForm, EditUserForm, LoginForm
@@ -31,8 +31,8 @@ connect_db(app)
 
 bcrypt = Bcrypt()
 
-@app.before_request
-def add_user_to_g():
+@app.before_request 
+def add_user_to_g(): # create def add_user_to_g()
   """If we're logged in, add curr user to Flask global."""
 
   if CURR_USER_KEY in session:
@@ -46,14 +46,14 @@ def do_login(user):
 
   session[CURR_USER_KEY] = user.id
 
-def do_logout():
+def do_logout(): # create def d0_logout():
   """Logout user."""
 
   if CURR_USER_KEY in session:
     del session[CURR_USER_KEY]
 
 @app.route('/signup', methods=["GET", "POST"])
-def signup():
+def signup(): # create def signup():
   """Handle user signup.
 
   Create new user and add user to database. Redirect to home page."""
@@ -85,7 +85,7 @@ def signup():
     return render_template('users/signup.html', form=form)
 
 @app.route('/login', methods=["GET", "POST"])
-def login():
+def login(): # create def login():
   """Handle user login."""
 
   form = LoginForm()
@@ -106,7 +106,7 @@ def login():
   return render_template('users/login.html', form=form)
 
 @app.route('/edit', methods=["GET", "POST"])
-def edit_user():
+def edit_user(): # create def edit_user():
   """Edit User Info"""
 
   if CURR_USER_KEY in session:
@@ -146,7 +146,7 @@ def edit_user():
   return render_template('users/edit.html', form=form)
 
 @app.route('/logout')
-def logout():
+def logout(): # create def logout():
   """Handle user logout."""
 
   if CURR_USER_KEY in session:
@@ -156,12 +156,12 @@ def logout():
     return redirect('/login')
 
 @app.route('/')
-def home_page():
+def home_page(): # create def home_page():
 
   return render_template('title.html')
 
 @app.route('/genres', methods=["GET", "POST"])
-def get_genres():
+def get_genres(): # create def_genres():
 
   genres = Genre.query.all()
 
